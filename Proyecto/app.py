@@ -25,6 +25,7 @@ def consultaProlog():
     relacion = '0'
     nombre1 = '0'
     nombre2 = '0'
+    unica = 0
     prolog = Prolog()
     prolog.consult("Parientes.pl")
     result = []
@@ -39,38 +40,58 @@ def consultaProlog():
     while p != len(y):
 
         if relacion == '0':
-            relacion = relaciones(y[p])
+            relacion,unica = relaciones(y[p])
 
         if nombre1 == '0':
             nombre1 = nombres(y[p])
-
-        if nombre2 == '0':
+        elif nombre2 == '0' and nombre1 != '0':
             nombre2 = nombres(y[p])
 
         p = p+1
+    
+    if relacion != '0' and nombre1 != '0' and nombre2 != '0':
+        if bool(list(prolog.query(""+relacion+"("+nombre1+","+nombre2+")"))):
+            print("Asi es!")
+        else:
+            print('Incorrecto!')
 
-    rel = Functor(""+relacion+"", 2)
+    elif relacion !=0 and nombre1 != '0' and nombre2 == '0' and unica != 1:
+        rel = Functor(""+relacion+"", 2)
 
-    X = Variable()
+        X = Variable()
 
-    q = Query(rel(""+nombre1+"", X))
-    print('')
-    print('')
-    while q.nextSolution():
-        print("LA RESPUESTA ES: ", X.value)
+        q = Query(rel(""+nombre1+"", X))
+        print('')
+        print('')
+        while q.nextSolution():
 
-    q.closeQuery()
+            print("LA RESPUESTA ES: ", X.value)
+
+        q.closeQuery() 
+    elif relacion != '0' and nombre1 != '0' and nombre2 == '0' and unica ==1:
+        
+        if bool(list(prolog.query(""+relacion+"("+nombre1+")"))):
+            print("Asi es!")
+        else: 
+            print("Incorrecto!")
+    elif relacion == '0' and nombre1 == '0' and nombre2 == '0':
+        print('Perdon, no logro entenderte!!')
 
 
 # Diccionario de relaciones
 def relaciones(x):
-    rel = ['progenitor', 'descendiente', 'hombre', 'mujer',
-           'hermana', 'nieto', 'tio', 'hijo', 'mama', 'esposo', 'papa']
+    rel = ['progenitor', 'descendiente','hermana', 'nieto', 'tio', 'hijo', 'mama', 'esposo', 'papa']
+    relUnica = ['hombre', 'mujer']
 
     if x in rel:
-        return x
+        return x, 0
     else:
-        return '0'
+        if x in relUnica:
+            return x, 1
+        else: 
+            return '0', 0
+    
+
 
 # Diccionario de nombres
 
