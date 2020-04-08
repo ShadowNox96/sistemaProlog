@@ -8,17 +8,17 @@ def main():
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
 
-        print("Please say something")
+        print("Por favor, digame su pregunta")
 
         audio = r.listen(source)
 
-        print("Recognizing Now .... ")
+        print("Reconociendo.... ")
 
         # recognize speech using google
 
         try:
-            print("You have said \n" + r.recognize_google(audio))
-            print("Audio Recorded Successfully \n ")
+            print("Usted dijo? \n" + r.recognize_google(audio))
+            
 
         except Exception as e:
             print("Error :  " + str(e))
