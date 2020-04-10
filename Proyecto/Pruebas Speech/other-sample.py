@@ -8,7 +8,7 @@ with sr.Microphone() as source:
 
 # recognize speech using Sphinx
 try:
-    print("Dijiste" + r.recognize_sphinx(audio))
+    print("Dijiste" + r.recognize_google(audio, language = 'es-ES'))
 except sr.UnknownValueError:
     print("Sphinx could not understand audio")
 
