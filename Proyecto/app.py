@@ -21,7 +21,7 @@ def main():
 # Clase que realiza la consulta
 
 
-def consultaProlog():
+def consultaProlog(pregunta):
     relacion = '0'
     nombre1 = '0'
     nombre2 = '0'
@@ -29,10 +29,11 @@ def consultaProlog():
     prolog = Prolog()
     prolog.consult("Parientes.pl")
     result = []
+    value = ''
 
     # Solicito la entrada
-    print('Ingrese la pregunta:')
-    pregunta = input()
+    #print('Ingrese la pregunta:')
+    #pregunta = input()
 
     y = pregunta.split(' ')
 
@@ -51,9 +52,13 @@ def consultaProlog():
     
     if relacion != '0' and nombre1 != '0' and nombre2 != '0':
         if bool(list(prolog.query(""+relacion+"("+nombre1+","+nombre2+")"))):
-            print("Asi es!")
+            value ='Asi es!'
+            #print("Asi es!")
+            return value
         else:
-            print('Incorrecto!')
+            value = 'Incorrecto!'
+            #print('Incorrecto!')
+            return value
 
     elif relacion !=0 and nombre1 != '0' and nombre2 == '0' and unica != 1:
         rel = Functor(""+relacion+"", 2)
@@ -64,18 +69,25 @@ def consultaProlog():
         print('')
         print('')
         while q.nextSolution():
-
-            print("LA RESPUESTA ES: ", X.value)
+            value = value +', '+ str(X.value)
+            #print("LA RESPUESTA ES: ", X.value)
 
         q.closeQuery() 
+        return value
     elif relacion != '0' and nombre1 != '0' and nombre2 == '0' and unica ==1:
         
         if bool(list(prolog.query(""+relacion+"("+nombre1+")"))):
-            print("Asi es!")
+            value = 'Asi es!'
+            #print("Asi es!")
+            return value
         else: 
-            print("Incorrecto!")
+            value = 'Incorrecto!'
+            return value
+            #print("Incorrecto!")
     elif relacion == '0' and nombre1 == '0' and nombre2 == '0':
-        print('Perdon, no logro entenderte!!')
+        value = 'Perdon, no logro entenderte!!'
+        return value
+        #print('Perdon, no logro entenderte!!')
 
 
 # Diccionario de relaciones
