@@ -2,6 +2,7 @@ from tkinter import ttk
 from tkinter import *
 from app import *
 from speech import *
+from speak import *
 
 class Inicio:
 
@@ -39,8 +40,10 @@ class Inicio:
         self.message1['text'] = 'RESPUESTA: '
         self.message['text'] = '{}'.format(value)
         self.pregunta.delete(0, END)
+        reproducirTexto(value)
 
     def speech(self):
+        self.pregunta.delete(0, END)
         value = main()
         self.messageSpeech['text'] = 'Usted dijo?'
         self.returnSpeech['text'] = '{}'.format(value) 
