@@ -11,4 +11,4 @@ Es necesario instalar las siguientes librerias:
   - pip install PyAudio
   
   
-Luego es necesario ejecutar el archivo app.py pra iniciar el sistema.
+Luego es necesario ejecutar el archivo index.py pra iniciar el sistema.
