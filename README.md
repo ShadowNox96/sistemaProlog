@@ -6,7 +6,7 @@ Utilizando la libreria pyswip, permite recibir preguntas por medio de lenguaje n
 Es necesario instalar las siguientes librerias:
   - pip install pyswip
   - pip install SpeechRecognition
-  - pip install gtts
+  - pip install gTTS
   - pip install playsound
   - pip install PyAudio
   
